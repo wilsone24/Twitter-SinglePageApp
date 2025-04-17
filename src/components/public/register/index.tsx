@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./Register.css";
 
 function Register() {
   const [name, setName] = useState("");
@@ -8,7 +9,7 @@ function Register() {
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
   const register_post = async () => {
-    const response = await fetch("http://0.0.0.0:8083/api/users", {
+    const response = await fetch("http://localhost:8083/api/users/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -31,7 +32,10 @@ function Register() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (password !== passwordConfirmation) {
+    if (!name || !email || !username || !password || !passwordConfirmation) {
+      alert("Please fill in all fields!");
+      return;
+    } else if (password !== passwordConfirmation) {
       alert("Passwords do not match!");
       return;
     }
