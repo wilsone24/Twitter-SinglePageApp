@@ -1,5 +1,6 @@
+import Public from "./components/public";
 function App() {
-  return <></>;
+  return <Public></Public>;
 }
 
 export default App;
