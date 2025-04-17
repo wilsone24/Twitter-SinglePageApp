@@ -1,5 +1,5 @@
 
-
+import Register from "./register";
 
 
 function Public() {
@@ -7,6 +7,7 @@ function Public() {
     <div>
       <h1>Public</h1>
       <p>This is a public component.</p>
+      <Register></Register>
     </div>
   );
 }
