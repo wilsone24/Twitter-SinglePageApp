@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Post from "./post";
-import { PostData } from "./newpost";
-import Newpost from "./newpost";
+import Newpost, { PostData } from "./newpost";
 
 interface PostsProps {
   username: string;

@@ -4,7 +4,6 @@ export interface PostData {
   id: number;
   username: string;
   description: string;
-  deletePost?: () => void;
 }
 
 interface NewPostProps {
