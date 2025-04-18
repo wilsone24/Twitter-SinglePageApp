@@ -1,28 +1,50 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import Post from "./post";
-import Newpost, { PostData } from "./newpost";
+import Newpost from "./newpost";
 
-interface PostsProps {
-  username: string;
-}
+const Posts = ({ username }) => {
+  const [posts, setPosts] = useState([]);
 
-const Posts: React.FC<PostsProps> = ({ username }) => {
-  const [posts, setPosts] = useState<PostData[]>([]);
+  const getPosts = async () => {
+    try {
+      const response = await fetch("http://localhost:8083/api/tweets", {
+        method: "GET",
+        headers: {
+          "x-access-token": localStorage.getItem("token") ?? "",
+          "Content-Type": "application/json",
+        },
+      });
 
-  const deletePost = (id: number) => {
-    setPosts(posts.filter((post) => post.id !== id));
+      if (!response.ok) {
+        throw new Error("Error en la respuesta del servidor");
+      }
+
+      const data = await response.json();
+
+      const userPosts = data.data.filter(
+        (post) => post.user.username === username
+      );
+
+      setPosts(userPosts);
+    } catch (error) {
+      console.error("Error al obtener los posts:", error);
+    }
   };
+
+  useEffect(() => {
+    getPosts();
+  }, []);
 
   return (
     <div>
-      <Newpost posts={posts} setPosts={setPosts} username={username}></Newpost>
+      <Newpost onPostAdded={getPosts} />
       <div>
-        {[...posts].reverse().map((post) => (
+        {[...posts].map((post) => (
           <Post
-            key={post.id}
-            username={post.username}
-            description={post.description}
-            deletePost={() => deletePost(post.id)}
+            key={post._id}
+            username={post.user.username}
+            description={post.content}
+            deletePost={() => {}}
           />
         ))}
       </div>
