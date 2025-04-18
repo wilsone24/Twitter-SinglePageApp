@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Login from "./login/login";
-import Register from "./register/register";
-import Homepage from "../private/homepage";
+import Login from "./login";
+import Register from "./register";
+import Homepage from "../private";
 
 const Public: React.FC = () => {
   const [token, setToken] = useState<string | null>(

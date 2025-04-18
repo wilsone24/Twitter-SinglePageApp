@@ -1,5 +1,5 @@
 import React from "react";
-import Public from "./components/public/public";
+import Public from "./components/public";
 
 const App: React.FC = () => {
   return <Public />;
