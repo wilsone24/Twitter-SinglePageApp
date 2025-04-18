@@ -1,4 +1,5 @@
 import React from "react";
+import Posts from "./posts";
 
 interface HomepageProps {
   username: string;
@@ -25,6 +26,7 @@ const Homepage: React.FC<HomepageProps> = ({
       <h2>Bienvenido {name}</h2>
       <p>Tu usuario es: {username}</p>
       <button onClick={handleLogout}>Cerrar sesión</button>
+      <Posts username={username}></Posts>
     </div>
   );
 };
