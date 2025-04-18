@@ -97,6 +97,19 @@ function Register({ onSuccess }: RegisterProps) {
         </div>
         <button type="submit">Register Now!</button>
       </form>
+      <p>
+        ¿Ya tienes una cuenta?{" "}
+        <a
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            onSuccess();
+          }}
+          style={{ cursor: "pointer", color: "blue" }}
+        >
+          Inicia sesión aquí
+        </a>
+      </p>
     </div>
   );
 }
