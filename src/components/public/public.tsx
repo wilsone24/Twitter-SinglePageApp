@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Login from "./login/login";
+import Register from "./register/register";
 import Homepage from "../private/homepage";
 
 const Public: React.FC = () => {
@@ -9,6 +10,7 @@ const Public: React.FC = () => {
   const [user, setUser] = useState<{ username: string; name: string } | null>(
     null
   );
+  const [showRegister, setShowRegister] = useState(false);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -25,7 +27,17 @@ const Public: React.FC = () => {
     return <Homepage username={user.username} name={user.name} />;
   }
 
-  return <Login setToken={setToken} setUser={setUser} />;
+  if (showRegister) {
+    return <Register onSuccess={() => setShowRegister(false)} />;
+  }
+
+  return (
+    <Login
+      setToken={setToken}
+      setUser={setUser}
+      onSwitchToRegister={() => setShowRegister(true)}
+    />
+  );
 };
 
 export default Public;

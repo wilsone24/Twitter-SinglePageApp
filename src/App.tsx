@@ -1,8 +1,8 @@
 import React from "react";
-import PublicRoutes from "./components/public/public";
+import Public from "./components/public/public";
 
 const App: React.FC = () => {
-  return <PublicRoutes />;
+  return <Public />;
 };
 
 export default App;
