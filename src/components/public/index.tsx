@@ -24,7 +24,14 @@ const Public: React.FC = () => {
   }, []);
 
   if (token && user) {
-    return <Homepage username={user.username} name={user.name} />;
+    return (
+      <Homepage
+        username={user.username}
+        name={user.name}
+        setToken={setToken}
+        setUser={setUser}
+      />
+    );
   }
 
   if (showRegister) {

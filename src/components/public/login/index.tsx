@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 interface LoginProps {
-  setToken: (token: string) => void;
-  setUser: (user: { username: string; name: string }) => void;
+  setToken: (token: string | null) => void;
+  setUser: (user: { username: string; name: string } | null) => void;
   onSwitchToRegister: () => void;
 }
 
@@ -22,7 +22,7 @@ const Login: React.FC<LoginProps> = ({
 
     try {
       // 1. Hacer la petición HTTP
-      const response = await fetch("http://0.0.0.0:8083/api/users/login", {
+      const response = await fetch("http://localhost:8083/api/users/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
