@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Newpost = ({ onPostAdded }) => {
+const Newpost = ({ onPostAdded, username }) => {
   const [newDescription, setNewDescription] = useState("");
 
   const getUserID = async () => {
@@ -15,7 +15,7 @@ const Newpost = ({ onPostAdded }) => {
       throw new Error("Error en la respuesta del servidor");
     }
     const data = await response.json();
-    const miUsuario = data.data.find((user) => user.username === "darrrr_v");
+    const miUsuario = data.data.find((user) => user.username === username);
     return miUsuario._id;
   };
 
