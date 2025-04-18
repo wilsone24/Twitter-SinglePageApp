@@ -1,7 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Register.css";
 
-function Register() {
+interface RegisterProps {
+  onSuccess: () => void;
+}
+
+function Register({ onSuccess }: RegisterProps) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -19,32 +23,28 @@ function Register() {
         password,
         passwordConfirmation,
       }),
-    }); // wilsone wilsone@gmail.com   wil24
+    });
     const data = await response.json();
     console.log(data);
-    setName("");
-    setEmail("");
-    setUsername("");
-    setPassword("");
-    setPasswordConfirmation("");
-    alert("Registration successful!");
+    if (response.ok) {
+      alert("¡Registro exitoso! Por favor inicia sesión.");
+      onSuccess();
+    } else {
+      alert("Error: " + (data.message || "No se pudo completar el registro"));
+    }
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!name || !email || !username || !password || !passwordConfirmation) {
-      alert("Please fill in all fields!");
+      alert("Por favor completa todos los campos");
       return;
     } else if (password !== passwordConfirmation) {
-      alert("Passwords do not match!");
+      alert("Las contraseñas no coinciden");
       return;
     }
     register_post();
   };
-
-  useEffect(() => {
-    console.log(name);
-  }, [name]);
 
   return (
     <div>
@@ -59,7 +59,6 @@ function Register() {
             placeholder="Enter your name"
           />
         </div>
-
         <div>
           <label htmlFor="email">Email:</label>
           <input
@@ -69,7 +68,6 @@ function Register() {
             placeholder="Enter your email"
           />
         </div>
-
         <div>
           <label htmlFor="username">Username:</label>
           <input
@@ -79,7 +77,6 @@ function Register() {
             placeholder="Choose a username"
           />
         </div>
-
         <div>
           <label htmlFor="password">Password:</label>
           <input
@@ -89,7 +86,6 @@ function Register() {
             placeholder="Enter a password"
           />
         </div>
-
         <div>
           <label htmlFor="passwordConfirmation">Confirm Password:</label>
           <input
@@ -99,9 +95,21 @@ function Register() {
             placeholder="Repeat your password"
           />
         </div>
-
         <button type="submit">Register Now!</button>
       </form>
+      <p>
+        ¿Ya tienes una cuenta?{" "}
+        <a
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            onSuccess();
+          }}
+          style={{ cursor: "pointer", color: "blue" }}
+        >
+          Inicia sesión aquí
+        </a>
+      </p>
     </div>
   );
 }

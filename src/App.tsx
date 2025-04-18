@@ -1,6 +1,8 @@
-import Public from "./components/public";
-function App() {
-  return <Public></Public>;
-}
+import React from "react";
+import Public from "./components/public/public";
+
+const App: React.FC = () => {
+  return <Public />;
+};
 
 export default App;
