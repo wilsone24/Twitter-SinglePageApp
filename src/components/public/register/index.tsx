@@ -32,7 +32,7 @@ const Register: React.FC<RegisterProps> = ({ onSuccess }) => {
         alert("¡Registro exitoso! Por favor inicia sesión.");
         onSuccess();
       } else {
-        alert("Error: " + (data.message || "No se pudo completar el registro"));
+        alert("Error: " + (data.message ?? "No se pudo completar el registro"));
       }
     } catch (error) {
       console.error("Error en el registro:", error);
