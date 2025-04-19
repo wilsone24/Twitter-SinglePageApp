@@ -5,6 +5,22 @@ import Newpost from "./newpost";
 const Posts = ({ username }) => {
   const [posts, setPosts] = useState([]);
 
+  const getUserID = async () => {
+    const response = await fetch("http://localhost:8083/api/users", {
+      method: "GET",
+      headers: {
+        "x-access-token": localStorage.getItem("token") ?? "",
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Error en la respuesta del servidor");
+    }
+    const data = await response.json();
+    const miUsuario = data.data.find((user) => user.username === username);
+    return miUsuario._id;
+  };
+
   const getPosts = async () => {
     try {
       const response = await fetch("http://localhost:8083/api/tweets", {
@@ -31,16 +47,21 @@ const Posts = ({ username }) => {
     getPosts();
   }, []);
 
-  const deletePost = async (postId) => {
-    const response = await fetch(`http://localhost:8083/api/tweets`, {
+  const deletePost = async (tweetId, userId) => {
+    const response = await fetch("http://localhost:8083/api/tweets", {
       method: "DELETE",
       headers: {
         "x-access-token": localStorage.getItem("token") ?? "",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ postId, username }),
+      body: JSON.stringify({ tweetId, userId }),
     });
+    const data = await response.json();
+    console.log(data);
+    getPosts();
   };
+
+  const userId = getUserID();
 
   return (
     <div>
@@ -51,7 +72,7 @@ const Posts = ({ username }) => {
             key={post._id}
             username={post.user.username}
             description={post.content}
-            deletePost={() => deletePost(post._id, post.user.username)}
+            deletePost={() => deletePost(post._id, userId)}
           />
         ))}
       </div>
