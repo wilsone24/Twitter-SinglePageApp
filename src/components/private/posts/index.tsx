@@ -1,85 +1,44 @@
 import { useState, useEffect } from "react";
-import Post from "./post";
-import Newpost from "./newpost";
+import Post from "../Post";
+import NewPost from "../NewPost";
+import { getAllPosts, deletePost, getUserID } from "../../../services/api";
 
-const Posts = ({ username }) => {
+const Posts = ({ username }: { username: string }) => {
   const [posts, setPosts] = useState([]);
+  const [userId, setUserId] = useState("");
 
-  const getUserID = async () => {
-    const response = await fetch("http://localhost:8083/api/users", {
-      method: "GET",
-      headers: {
-        "x-access-token": localStorage.getItem("token") ?? "",
-        "Content-Type": "application/json",
-      },
-    });
-    if (!response.ok) {
-      throw new Error("Error en la respuesta del servidor");
-    }
-    const data = await response.json();
-    const miUsuario = data.data.find((user) => user.username === username);
-    return miUsuario._id;
-  };
-
-  const getPosts = async () => {
-    try {
-      const response = await fetch("http://localhost:8083/api/tweets", {
-        method: "GET",
-        headers: {
-          "x-access-token": localStorage.getItem("token") ?? "",
-          "Content-Type": "application/json",
-        },
-      });
-      if (!response.ok) {
-        throw new Error("Error en la respuesta del servidor");
-      }
-      const data = await response.json();
-      const userPosts = data.data.filter(
-        (post) => post.user.username === username
-      );
-      setPosts(userPosts);
-    } catch (error) {
-      console.error("Error al obtener los posts:", error);
-    }
+  const fetchPosts = async () => {
+    const allPosts = await getAllPosts();
+    const userPosts = allPosts.filter((p) => p.user.username === username);
+    setPosts(userPosts);
   };
 
   useEffect(() => {
-    getPosts();
+    const fetchData = async () => {
+      const id = await getUserID(username);
+      setUserId(id);
+      await fetchPosts();
+    };
+    fetchData();
   }, []);
 
-  const deletePost = async (tweetId, userId) => {
-    const response = await fetch("http://localhost:8083/api/tweets", {
-      method: "DELETE",
-      headers: {
-        "x-access-token": localStorage.getItem("token") ?? "",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ tweetId, userId }),
-    });
-    const data = await response.json();
-    console.log(data);
-    getPosts();
+  const handleDelete = async (postId: string) => {
+    await deletePost(postId, userId);
+    fetchPosts();
   };
-
-  const userId = getUserID();
 
   return (
     <div>
-      <Newpost onPostAdded={getPosts} username={username} />
-      <div>
-        {posts.map((post) => (
-          <Post
-            key={post._id}
-            username={post.user.username}
-            description={post.content}
-            deletePost={() => deletePost(post._id, userId)}
-            postId={post._id}
-            userId={userId}
-            comments={post.comments}
-            getPosts={getPosts}
-          />
-        ))}
-      </div>
+      <NewPost onPostAdded={fetchPosts} username={username} />
+      {posts.map((post) => (
+        <Post
+          key={post._id}
+          {...post}
+          userId={userId}
+          deletePost={() => handleDelete(post._id)}
+          getPosts={fetchPosts}
+        />
+      ))}
     </div>
   );
 };

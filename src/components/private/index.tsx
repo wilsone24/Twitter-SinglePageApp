@@ -1,24 +1,18 @@
-import React from "react";
-import Posts from "./posts";
+import Posts from "./Posts";
 
-interface HomepageProps {
+type HomepageProps = {
   username: string;
   name: string;
   setToken: (token: string | null) => void;
-  setUser: (user: { username: string; name: string } | null) => void;
-}
+  setUser: (user: any) => void;
+};
 
-const Homepage: React.FC<HomepageProps> = ({
-  username,
-  name,
-  setToken,
-  setUser,
-}) => {
+const Homepage = ({ username, name, setToken, setUser }: HomepageProps) => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setToken(null);
-    setUser(null); // Limpiar el estado del usuario
+    setUser(null);
   };
 
   return (
@@ -26,7 +20,7 @@ const Homepage: React.FC<HomepageProps> = ({
       <h2>Bienvenido {name}</h2>
       <p>Tu usuario es: {username}</p>
       <button onClick={handleLogout}>Cerrar sesión</button>
-      <Posts username={username}></Posts>
+      <Posts username={username} />
     </div>
   );
 };
