@@ -73,6 +73,10 @@ const Posts = ({ username }) => {
             username={post.user.username}
             description={post.content}
             deletePost={() => deletePost(post._id, userId)}
+            postId={post._id}
+            userId={userId}
+            comments={post.comments}
+            getPosts={getPosts}
           />
         ))}
       </div>

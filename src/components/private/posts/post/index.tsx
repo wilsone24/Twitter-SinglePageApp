@@ -1,12 +1,14 @@
-import React from "react";
+import ReplyForm from "../replyform"; // 👈 Importa este componente
 
-export interface PostProps {
-  username: string;
-  description: string;
-  deletePost: () => void;
-}
-
-const Post: React.FC<PostProps> = ({ username, description, deletePost }) => {
+const Post = ({
+  username,
+  description,
+  deletePost,
+  postId,
+  userId,
+  comments,
+  getPosts,
+}) => {
   return (
     <div
       style={{
@@ -28,6 +30,30 @@ const Post: React.FC<PostProps> = ({ username, description, deletePost }) => {
       >
         Eliminar Post
       </button>
+
+      <ReplyForm
+        tweetId={postId}
+        username={username}
+        userId={userId}
+        getPosts={getPosts}
+      />
+      <div>
+        {comments.map((comment) => (
+          <div
+            key={comment._id}
+            style={{
+              border: "1px solid #ccc",
+              padding: "10px",
+              marginBottom: "10px",
+            }}
+          >
+            <p>
+              <strong>{username}</strong>
+            </p>
+            <p>{comment.comment}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
