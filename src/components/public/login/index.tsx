@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./login.css";
 
 interface LoginProps {
   setToken: (token: string | null) => void;
@@ -61,9 +62,10 @@ const Login: React.FC<LoginProps> = ({
   };
 
   return (
-    <div>
-      <h2>Login</h2>
+    <div id="login-container">
+      <h2 id="login-h2">Login</h2>
       <input
+        className="login-input"
         placeholder="Username"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
@@ -71,6 +73,7 @@ const Login: React.FC<LoginProps> = ({
       />
       <br />
       <input
+        className="login-input"
         type="password"
         placeholder="Password"
         value={password}
@@ -82,20 +85,20 @@ const Login: React.FC<LoginProps> = ({
         <p style={{ color: "red" }}>Usuario o contraseña incorrectos</p>
       )}
       <br />
-      <button onClick={handleLogin} disabled={isLoading}>
-        {isLoading ? "Cargando..." : "Iniciar sesión"}
-      </button>
-      <br />
-      <a
-        href="#"
-        onClick={(e) => {
-          e.preventDefault();
-          onSwitchToRegister();
-        }}
-        style={{ cursor: "pointer", color: "blue" }}
-      >
-        Registrarse
-      </a>
+      <div id="login-buttons">
+        <button onClick={handleLogin} disabled={isLoading}>
+          {isLoading ? "Cargando..." : "Iniciar sesión"}
+        </button>
+        <br />
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            onSwitchToRegister();
+          }}
+        >
+          Registrarse
+        </button>
+      </div>
     </div>
   );
 };

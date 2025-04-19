@@ -1,4 +1,4 @@
-import React, { useState, FormEvent, ChangeEvent } from "react";
+import React, { useState, FormEvent } from "react";
 import "./Register.css";
 
 interface RegisterProps {
@@ -57,83 +57,74 @@ const Register: React.FC<RegisterProps> = ({ onSuccess }) => {
   };
 
   return (
-    <div>
-      <h2>Register</h2>
+    <div id="register-container">
+      <h2 id="register-h2">Registrarse</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="name">Name:</label>
           <input
+            className="register-input"
             id="name"
             type="text"
             value={name}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setName(e.target.value)
-            }
-            placeholder="Enter your name"
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Nombre completo"
           />
         </div>
         <div>
-          <label htmlFor="email">Email:</label>
           <input
+            className="register-input"
             id="email"
             type="email"
             value={email}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setEmail(e.target.value)
-            }
-            placeholder="Enter your email"
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Correo electrónico"
           />
         </div>
         <div>
-          <label htmlFor="username">Username:</label>
           <input
+            className="register-input"
             id="username"
             type="text"
             value={username}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setUsername(e.target.value)
-            }
-            placeholder="Choose a username"
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Nombre de usuario"
           />
         </div>
         <div>
-          <label htmlFor="password">Password:</label>
           <input
+            className="register-input"
             id="password"
             type="password"
             value={password}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setPassword(e.target.value)
-            }
-            placeholder="Enter a password"
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Contraseña"
           />
         </div>
         <div>
-          <label htmlFor="passwordConfirmation">Confirm Password:</label>
           <input
+            className="register-input"
             id="passwordConfirmation"
             type="password"
             value={passwordConfirmation}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setPasswordConfirmation(e.target.value)
-            }
-            placeholder="Repeat your password"
+            onChange={(e) => setPasswordConfirmation(e.target.value)}
+            placeholder="Confirmar contraseña"
           />
         </div>
-        <button type="submit">Register Now!</button>
+        <button type="submit" id="register-button">
+          ¡Registrarse ahora!
+        </button>
       </form>
-      <p>
+      <p className="register-link">
         ¿Ya tienes una cuenta?{" "}
-        <a
-          href="#"
+        <button
+          id="register-button"
           onClick={(e) => {
             e.preventDefault();
             onSuccess();
           }}
-          style={{ cursor: "pointer", color: "blue" }}
         >
           Inicia sesión aquí
-        </a>
+        </button>
       </p>
     </div>
   );
