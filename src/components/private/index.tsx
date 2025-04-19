@@ -1,5 +1,5 @@
-import Posts from "./Posts";
-
+import Posts from "./posts";
+import "./homepage.css";
 type HomepageProps = {
   username: string;
   name: string;
@@ -16,11 +16,17 @@ const Homepage = ({ username, name, setToken, setUser }: HomepageProps) => {
   };
 
   return (
-    <div>
-      <h2>Bienvenido {name}</h2>
-      <p>Tu usuario es: {username}</p>
-      <button onClick={handleLogout}>Cerrar sesión</button>
-      <Posts username={username} />
+    <div className="container">
+      <section className="homepage">
+        <header className="homepageHeader">
+          <h2>{name}</h2>
+          <p>@{username}</p>
+          <button onClick={handleLogout}>
+            <img src="src/assets/logout.svg" alt="logut" />
+          </button>
+        </header>
+        <Posts username={username} />
+      </section>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createComment } from "../../../services/api";
+import "./replyForm.css";
 
 const ReplyForm = ({
   tweetId,
@@ -20,7 +21,7 @@ const ReplyForm = ({
   };
 
   return (
-    <div style={{ marginTop: 10 }}>
+    <div className="replyForm">
       <input
         type="text"
         value={comment}

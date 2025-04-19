@@ -1,0 +1,114 @@
+.post {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.postContent {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.postContent .deleteButton {
+  position: absolute;
+  right: 0;
+  top: 0;
+  border: none;
+  background: none;
+}
+.postContent .deleteButton:hover {
+  cursor: pointer;
+}
+.postContent .deleteButton img {
+  width: 20px;
+  height: 20px;
+}
+
+.postHeader {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.username {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+}
+.postDate {
+  font-size: 14px;
+  color: #888;
+  margin: 0;
+}
+.postText {
+  margin: 10px 20px 10px 10px;
+  font-size: 18px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.commentArea {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.commentArea h1 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+.comment {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+.comment p {
+  margin: 5px 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+.postActions {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.likeButton {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #536471;
+  padding: 5px 10px;
+  border-radius: 20px;
+  transition: all 0.2s;
+}
+
+.likeButton:hover {
+  background-color: rgba(249, 24, 128, 0.1);
+}
+
+.likeButton.liked {
+  color: #f91880;
+}
+
+.likeButton.liked:hover {
+  background-color: rgba(249, 24, 128, 0.1);
+}
+
+.heartIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.likesCount {
+  font-size: 14px;
+}

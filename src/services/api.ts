@@ -52,3 +52,13 @@ export const createComment = async (
   });
   return await res.json();
 };
+
+export const toggleLike = async (tweetId: string, like: number) => {
+  const res = await fetch(`${API_BASE}/tweets/likes`, {
+    method: "POST",
+    headers,
+    body: JSON.stringify({ tweetId, like }),
+  });
+  if (!res.ok) throw new Error("Error al actualizar like");
+  return await res.json();
+};

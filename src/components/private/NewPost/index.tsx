@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createPost, getUserID } from "../../../services/api";
+import "./newpost.css";
 
 type NewPostProps = {
   onPostAdded: () => void;
@@ -18,14 +19,13 @@ const NewPost = ({ onPostAdded, username }: NewPostProps) => {
   };
 
   return (
-    <div>
-      <input
-        type="text"
+    <div className="newPost">
+      <textarea
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-        placeholder="Escribe la descripción del post"
-      />
-      <button onClick={handleAddPost}>Agregar post</button>
+        placeholder="¿Qué estás pensando?"
+      ></textarea>
+      <button onClick={handleAddPost}>Postear</button>
     </div>
   );
 };

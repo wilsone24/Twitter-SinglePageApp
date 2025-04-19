@@ -1,0 +1,42 @@
+body {
+  margin: 0;
+}
+.container {
+  padding: 30px 20%;
+}
+
+.homepage {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+}
+
+.homepageHeader {
+  position: relative;
+}
+
+.homepageHeader h2 {
+  margin: 0;
+  font-size: 50px;
+}
+
+.homepageHeader p {
+  margin: 0;
+  font-size: 16px;
+  color: gray;
+}
+
+.homepageHeader button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  border: none;
+  background: none;
+}
+.homepageHeader button:hover {
+  cursor: pointer;
+}
+.homepageHeader button img {
+  width: 40px;
+  height: 40px;
+}
