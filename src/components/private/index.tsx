@@ -21,6 +21,14 @@ const Homepage = ({ username, name, setToken, setUser }: HomepageProps) => {
         <header className="homepageHeader">
           <h2>{name}</h2>
           <p>@{username}</p>
+          <button
+            onClick={() => {
+              throw new Error("This is your first error!");
+            }}
+          >
+            Break the world
+          </button>
+          ;
           <button onClick={handleLogout}>
             <img src="src/assets/logout.svg" alt="logut" />
           </button>
