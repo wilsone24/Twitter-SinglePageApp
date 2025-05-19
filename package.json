@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc --noEmit && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -25,6 +25,7 @@
     "@types/jest": "^29.5.14",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
+    "@types/webpack": "^5.28.5",
     "@vitejs/plugin-react": "^4.3.4",
     "eslint": "^9.22.0",
     "eslint-plugin-react-hooks": "^5.2.0",
@@ -34,10 +35,12 @@
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "jest-transformer-svg": "^2.1.0",
+    "rollup": "^3.29.5",
     "ts-jest": "^29.3.4",
     "ts-node": "^10.9.2",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.26.1",
-    "vite": "^6.3.1"
+    "unplugin": "^2.3.4",
+    "vite": "^4.4.9"
   }
 }

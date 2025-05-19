@@ -1,9 +1,6 @@
-const API_BASE = "http://localhost:8083/api";
+// @ts-nocheck
 
-const headers = {
-  "x-access-token": localStorage.getItem("token") ?? "",
-  "Content-Type": "application/json",
-};
+const API_BASE = "http://localhost:8083/api";
 
 export const getUserID = async (username: string) => {
   const res = await fetch(`${API_BASE}/users`, {

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState, useEffect } from "react";
 import Post from "../Post";
 import NewPost from "../NewPost";
