@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./login.css";
+import MyComponent from "../../MyComponent";
 
 interface LoginProps {
   setToken: (token: string | null) => void;
@@ -99,6 +100,7 @@ const Login: React.FC<LoginProps> = ({
           Registrarse
         </button>
       </div>
+      <MyComponent />
     </div>
   );
 };
