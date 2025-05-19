@@ -28,7 +28,6 @@ const Homepage = ({ username, name, setToken, setUser }: HomepageProps) => {
           >
             Break the world
           </button>
-          ;
           <button onClick={handleLogout}>
             <img src="src/assets/logout.svg" alt="logut" />
           </button>
