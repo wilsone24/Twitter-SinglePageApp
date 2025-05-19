@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: CI
 
 on:
   push:
@@ -7,12 +7,13 @@ on:
     branches: [main]
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout código
+      - name: Checkout código (default depth)
         uses: actions/checkout@v3
+        # fetch-depth: 1 por defecto
 
       - name: Instalar Node.js
         uses: actions/setup-node@v3
@@ -20,20 +21,26 @@ jobs:
           node-version: 18
 
       - name: Instalar dependencias
-        run: npm ci
+        run: npm install
 
-      - name: Ejecutar pruebas
+      - name: Lint
+        run: npm run lint
+
+      - name: Ejecutar tests
         run: npm run test -- --watch=false
 
-      - name: Compilar proyecto
+      - name: Build
         run: npm run build
 
-      - name: Subir release a Sentry (si aplica)
-        if: github.ref == 'refs/heads/main'
+      - name: Subir sourcemaps a Sentry
+        if: success()
         uses: getsentry/action-release@v1
         with:
           environment: production
           version: ${{ github.sha }}
+          sourcemaps: "./dist/assets"
+          set_commits: "auto"
+          ignore_missing: true
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
