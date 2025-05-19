@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import ReplyForm from "../src/components/private/Replyform";
+import ReplyForm from "../src/components/private/ReplyForm";
 import * as api from "../src/services/api";
 
 // Mock de createComment
