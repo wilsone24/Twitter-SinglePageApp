@@ -19,15 +19,15 @@
 
 ## 📄 Descripción
 
-Este proyecto es una SPA (Single Page Application) que imita el flujo básico de Twitter: ver tus posts, escribir posts, comentar en tus post y navegar sin recargar la página. 
+Este proyecto es una SPA (Single Page Application) que imita el flujo básico de Twitter: ver tus publicaciones, escribir posts, comentar en tus propios posts y navegar sin recargar la página.
 
 ---
 
 ## 🚀 Features
 
-- 🐦 **Inicio**: Visualización de los tuits más recientes.
-- 📝 **Posteo**: Permite escribir y publicar un tuit.
-- 💬 **Comentarios**: Los usuarios pueden comentar los tuits publicados.
+- 🐦 **Inicio**: Visualización de los posts más recientes.
+- 📝 **Posteo**: Permite escribir y publicar un post.
+- 💬 **Comentarios**: Los usuarios pueden comentar en los posts publicados.
 - 📄 **Perfil**: Visualización de tus propios posts.
 - 🔐 **Autenticación**: Sistema de login para acceder a las funciones.
 - 🧭 **SPA Routing**: Navegación fluida sin recarga.
@@ -96,18 +96,29 @@ Usamos **GitHub Actions** como pipeline de integración continua. Cada vez que s
 ## 📁 Estructura del Proyecto
 
 ```
-Twitter-SinglePageApp/
-├── src/
-│   ├── components/       # Componentes de la SPA
-│   ├── pages/            # Páginas como Home, Tweet, etc.
-│   ├── routes/           # Configuración del enrutamiento
-│   └── utils/            # Funciones reutilizables y helpers
-├── tests/                # Tests con Jest
-├── .github/workflows/    # Configuraciones de CI
-├── .env                  # Variables de entorno (incluye Sentry/GrowthBook)
-├── index.html            # HTML principal
-├── package.json
-└── README.md
+├── .github/                  # Configuración de CI para automatización de tests
+├── node_modules/             # Dependencias del proyecto
+├── public/                   # Archivos públicos
+├── src/                      # Código fuente principal
+│   ├── assets/               # Recursos estáticos (imágenes, estilos, etc.)
+│   ├── components/           # Componentes reutilizables
+│   │   ├── private/          # Componentes de uso privado
+│   │   ├── public/           # Componentes públicos
+│   │   └── MyComponent.tsx   # Componente de la Feature Flag (activado/desactivado según el estado)
+│   ├── services/             # Servicios para lógica de negocio
+│   │   └── api.ts            # Comucicación con Apis
+│   ├── App.tsx               # Componente principal de la aplicación
+│   ├── main.tsx              # Punto de entrada de la aplicación
+│   └── vite-env.d.ts         # Tipado para Vite
+├── testing/                  # Pruebas con Jest
+├── .env.sentry-build-phase   # Variables de entorno de sentry
+├── .gitignore                # Archivos y carpetas ignorados por Git
+├── eslint.config.js          # Configuración de ESLint
+├── growthbook.ts             # Configuración de GrowthBook para feature flags
+├── index.html                # HTML base para Vite
+├── jest.config.js            # Configuración de Jest
+├── package-lock.json         # Control de versiones de dependencias
+├── package.json              # Información y scripts del proyecto
 ```
 
 ---
