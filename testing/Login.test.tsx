@@ -1,45 +1,50 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import Login from "../src/components/public/login";
+import { GrowthBook, GrowthBookProvider } from "@growthbook/growthbook-react";
+
+// Crear una instancia falsa de GrowthBook con la feature activa por defecto
+const gb = new GrowthBook({
+  features: {
+    "show-new-button": { defaultValue: true },
+  },
+});
 
 describe("Login component", () => {
   const mockSetToken = jest.fn();
   const mockSetUser = jest.fn();
-  const mockOnSwitchToRegister = jest.fn();
+  const mockSwitch = jest.fn();
 
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
-  // Verifica que los inputs de username y password, y los botones estén presentes en el renderizado inicial
-  test("renderiza inputs y botones correctamente", () => {
+  const renderWithProvider = () =>
     render(
-      <Login
-        setToken={mockSetToken}
-        setUser={mockSetUser}
-        onSwitchToRegister={mockOnSwitchToRegister}
-      />
+      <GrowthBookProvider growthbook={gb}>
+        <Login
+          setToken={mockSetToken}
+          setUser={mockSetUser}
+          onSwitchToRegister={mockSwitch}
+        />
+      </GrowthBookProvider>
     );
+
+  test("renderiza inputs y botones correctamente", () => {
+    renderWithProvider();
+
     expect(screen.getByPlaceholderText("Username")).toBeInTheDocument();
     expect(screen.getByPlaceholderText("Password")).toBeInTheDocument();
     expect(screen.getByText("Iniciar sesión")).toBeInTheDocument();
     expect(screen.getByText("Registrarse")).toBeInTheDocument();
+    expect(screen.getByText("Feature Flag Activo")).toBeInTheDocument(); // de MyComponent
   });
 
-  // Verifica que se pueda escribir texto en los inputs de username y password
   test("permite escribir en los inputs username y password", () => {
-    render(
-      <Login
-        setToken={mockSetToken}
-        setUser={mockSetUser}
-        onSwitchToRegister={mockOnSwitchToRegister}
-      />
-    );
+    renderWithProvider();
 
     const usernameInput = screen.getByPlaceholderText("Username");
     const passwordInput = screen.getByPlaceholderText("Password");
-    fireEvent.change(usernameInput, { target: { value: "usuario1" } });
-    fireEvent.change(passwordInput, { target: { value: "contraseña1" } });
-    expect(usernameInput).toHaveValue("usuario1");
-    expect(passwordInput).toHaveValue("contraseña1");
+
+    fireEvent.change(usernameInput, { target: { value: "user" } });
+    fireEvent.change(passwordInput, { target: { value: "pass" } });
+
+    expect(usernameInput).toHaveValue("user");
+    expect(passwordInput).toHaveValue("pass");
   });
 });
